@@ -9,53 +9,9 @@ import { PageContainer } from "@toolpad/core/PageContainer";
 import { createTheme, Stack, Typography } from "@mui/material";
 import SelectLangButton from "@/components/select-lang-button";
 import CloudCircleIcon from "@mui/icons-material/CloudCircle";
-import { LangProvider } from "@/context/lang-context";
+import { LangProvider, useLang } from "@/context/lang-context";
 import { useParams } from "next/navigation";
-const NAVIGATION: Navigation = [
-  {
-    kind: "header",
-    title: "Main items",
-  },
-  {
-    segment: "dashboard",
-    title: "Dashboard",
-    // icon: <DashboardIcon />,
-  },
-  {
-    segment: "member",
-    title: "Member",
-    // icon: <ShoppingCartIcon />,
-  },
-  {
-    kind: "divider",
-  },
-  {
-    kind: "header",
-    title: "Analytics",
-  },
-  {
-    segment: "reports",
-    title: "Reports",
-    // icon: <BarChartIcon />,
-    children: [
-      {
-        segment: "sales",
-        title: "Sales",
-        // icon: <DescriptionIcon />,
-      },
-      {
-        segment: "traffic",
-        title: "Traffic",
-        // icon: <DescriptionIcon />,
-      },
-    ],
-  },
-  {
-    segment: "integrations",
-    title: "Integrations",
-    // icon: <LayersIcon />,
-  },
-];
+import { useTranslation } from "react-i18next";
 
 const BRANDING = {
   title: "My Toolpad Core App",
@@ -100,7 +56,54 @@ type Props = {
 
 export default function AppLayout({ children }: Props) {
   const params = useParams();
-  const initialLang = params?.lng?.toString().toLowerCase() || "th";
+  const lang = params.lng;
+  const { t } = useTranslation(lang);
+
+  const NAVIGATION: Navigation = [
+    {
+      kind: "header",
+      title: "Main items",
+    },
+    {
+      segment: `${lang}/dashboard`,
+      title: t("dashboard"),
+      // icon: <DashboardIcon />,
+    },
+    {
+      segment: `${lang}/member`,
+      title: "Member",
+      // icon: <ShoppingCartIcon />,
+    },
+    {
+      kind: "divider",
+    },
+    {
+      kind: "header",
+      title: "Analytics",
+    },
+    {
+      segment: "reports",
+      title: "Reports",
+      // icon: <BarChartIcon />,
+      children: [
+        {
+          segment: "sales",
+          title: "Sales",
+          // icon: <DescriptionIcon />,
+        },
+        {
+          segment: "traffic",
+          title: "Traffic",
+          // icon: <DescriptionIcon />,
+        },
+      ],
+    },
+    {
+      segment: "integrations",
+      title: "Integrations",
+      // icon: <LayersIcon />,
+    },
+  ];
 
   function CustomAppTitle() {
     return (
@@ -116,7 +119,7 @@ export default function AppLayout({ children }: Props) {
   }
 
   return (
-    <html lang={initialLang} dir={dir(initialLang)}>
+    <html>
       <body>
         <LangProvider>
           <NextAppProvider navigation={NAVIGATION} theme={customTheme}>

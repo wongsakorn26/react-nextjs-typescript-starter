@@ -29,9 +29,9 @@ export const LangProvider = ({ children }: { children: ReactNode }) => {
   const initialLang = params?.lng?.toString().toLowerCase();
 
   const [lang, setLang] = useState(initialLang);
-  console.log(lang);
 
   useEffect(() => {
+    console.log(initialLang);
     setLang(initialLang);
   }, [initialLang]);
 

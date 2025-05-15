@@ -1,16 +1,17 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { useTranslation } from "@/app/i18n/client"
-import { Card, Row, Col } from "antd"
+import Link from "next/link";
+import { useTranslation } from "@/app/i18n/client";
+import { Card, Row, Col } from "antd";
 
-export default function Homepage({ params }: { params: { lng: string } }) {
-  const { lng } = params
-  const { t } = useTranslation(lng)
+export default function Dashboard({ params }: { params: { lng: string } }) {
+  const { lng } = params;
+  const { t } = useTranslation(lng);
 
   return (
     <Row gutter={16} justify={"center"}>
       <Col span={8}>
+        member
         <Link href={`/${lng}/quiz1`}>
           <Card title={t("test1")} variant="borderless">
             <h4 style={{ caretColor: "transparent" }}>{t("layoutStyle")}</h4>
@@ -25,5 +26,5 @@ export default function Homepage({ params }: { params: { lng: string } }) {
         </Link>
       </Col>
     </Row>
-  )
+  );
 }

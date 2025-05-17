@@ -1,9 +1,9 @@
 "use client";
 
-import { Select } from "antd";
 import { usePathname, useRouter } from "next/navigation";
 import { languages } from "@/app/i18n/settings";
 import { useLang } from "@/context/lang-context";
+import { Select, MenuItem, SelectChangeEvent } from "@mui/material";
 
 export default function SelectLangButton() {
   const pathname = usePathname();
@@ -11,8 +11,8 @@ export default function SelectLangButton() {
 
   const { lang, setLang } = useLang();
 
-  const handleChange = (value: string) => {
-    const newLang = value.toLowerCase();
+  const handleChange = (event: SelectChangeEvent) => {
+    const newLang = (event.target.value as string).toLowerCase();
     setLang(newLang);
 
     const segments = pathname.split("/");
@@ -27,21 +27,10 @@ export default function SelectLangButton() {
     router.push(newPath);
   };
 
-  const langOptionsEn = [
-    { value: "EN", label: "EN" },
-    { value: "TH", label: "TH" },
-  ];
-  const langOptionsTh = [
-    { value: "EN", label: "อังกฤษ" },
-    { value: "TH", label: "ไทย" },
-  ];
-
   return (
-    <Select
-      value={lang.toUpperCase()}
-      onChange={handleChange}
-      options={lang === "th" ? langOptionsTh : langOptionsEn}
-      dropdownStyle={{ zIndex: 2000 }}
-    />
+    <Select value={lang.toUpperCase()} onChange={handleChange} size="small">
+      <MenuItem value="EN">{lang === "th" ? "อังกฤษ" : "EN"}</MenuItem>
+      <MenuItem value="TH">{lang === "th" ? "ไทย" : "TH"}</MenuItem>
+    </Select>
   );
 }

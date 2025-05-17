@@ -6,49 +6,17 @@ import { NextAppProvider } from "@toolpad/core/nextjs";
 import { Navigation } from "@toolpad/core/AppProvider";
 import { DashboardLayout } from "@toolpad/core/DashboardLayout";
 import { PageContainer } from "@toolpad/core/PageContainer";
-import { createTheme, Stack, Typography } from "@mui/material";
+import { Stack, Typography, ThemeProvider, CssBaseline } from "@mui/material";
 import SelectLangButton from "@/components/select-lang-button";
 import CloudCircleIcon from "@mui/icons-material/CloudCircle";
 import { LangProvider, useLang } from "@/context/lang-context";
 import { useParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
+import customTheme from "../theme/theme";
 
 const BRANDING = {
   title: "My Toolpad Core App",
 };
-
-const customTheme = createTheme({
-  cssVariables: {
-    colorSchemeSelector: "data-toolpad-color-scheme",
-  },
-  colorSchemes: {
-    light: {
-      palette: {
-        background: {
-          default: "#F9F9FE",
-          paper: "#EEEEF9",
-        },
-      },
-    },
-    dark: {
-      palette: {
-        background: {
-          default: "#2A4364",
-          paper: "#112E4D",
-        },
-      },
-    },
-  },
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 600,
-      md: 600,
-      lg: 1200,
-      xl: 1536,
-    },
-  },
-});
 
 type Props = {
   children: React.ReactNode;
@@ -122,18 +90,21 @@ export default function AppLayout({ children }: Props) {
     <html>
       <body>
         <LangProvider>
-          <NextAppProvider navigation={NAVIGATION} theme={customTheme}>
-            <Provider store={store}>
-              <DashboardLayout
-                slots={{
-                  appTitle: CustomAppTitle,
-                  sidebarFooter: CustomFooter,
-                }}
-              >
-                <PageContainer>{children}</PageContainer>
-              </DashboardLayout>
-            </Provider>
-          </NextAppProvider>
+          <ThemeProvider theme={customTheme}>
+            <CssBaseline />
+            <NextAppProvider navigation={NAVIGATION}>
+              <Provider store={store}>
+                <DashboardLayout
+                  slots={{
+                    appTitle: CustomAppTitle,
+                    sidebarFooter: CustomFooter,
+                  }}
+                >
+                  <PageContainer>{children}</PageContainer>
+                </DashboardLayout>
+              </Provider>
+            </NextAppProvider>
+          </ThemeProvider>
         </LangProvider>
       </body>
     </html>

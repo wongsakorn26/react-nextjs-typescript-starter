@@ -11,7 +11,6 @@ export default function Dashboard({ params }: { params: { lng: string } }) {
   return (
     <Row gutter={16} justify={"center"}>
       <Col span={8}>
-        dashboard
         <Link href={`/${lng}/quiz1`}>
           <Card title={t("test1")} variant="borderless">
             <h4 style={{ caretColor: "transparent" }}>{t("layoutStyle")}</h4>

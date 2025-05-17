@@ -2,29 +2,37 @@
 
 import Link from "next/link";
 import { useTranslation } from "@/app/i18n/client";
-import { Card, Row, Col } from "antd";
+import * as React from "react";
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 export default function Dashboard({ params }: { params: { lng: string } }) {
   const { lng } = params;
   const { t } = useTranslation(lng);
+  const [age, setAge] = React.useState("");
 
+  const handleChange = (event: SelectChangeEvent) => {
+    setAge(event.target.value as string);
+  };
   return (
-    <Row gutter={16} justify={"center"}>
-      <Col span={8}>
-        member
-        <Link href={`/${lng}/quiz1`}>
-          <Card title={t("test1")} variant="borderless">
-            <h4 style={{ caretColor: "transparent" }}>{t("layoutStyle")}</h4>
-          </Card>
-        </Link>
-      </Col>
-      <Col span={8}>
-        <Link href={`/${lng}/quiz2`}>
-          <Card title={t("test2")} variant="borderless">
-            <h4 style={{ caretColor: "transparent" }}>{t("formManagement")}</h4>
-          </Card>
-        </Link>
-      </Col>
-    </Row>
+    <Box sx={{ minWidth: 120 }}>
+      <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Age</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={age}
+          label="Age"
+          onChange={handleChange}
+        >
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+      </FormControl>
+    </Box>
   );
 }

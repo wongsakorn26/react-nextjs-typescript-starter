@@ -13,6 +13,7 @@ import { LangProvider, useLang } from "@/context/lang-context";
 import { useParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import customTheme from "../theme/theme";
+import CustomPageHeader from "@/components/page-container/custom-page-header";
 
 const BRANDING = {
   title: "My Toolpad Core App",
@@ -39,7 +40,7 @@ export default function AppLayout({ children }: Props) {
     },
     {
       segment: `${lang}/member`,
-      title: "Member",
+      title: t("member"),
       // icon: <ShoppingCartIcon />,
     },
     {
@@ -100,7 +101,12 @@ export default function AppLayout({ children }: Props) {
                     sidebarFooter: CustomFooter,
                   }}
                 >
-                  <PageContainer>{children}</PageContainer>
+                  <PageContainer
+                    slots={{ header: CustomPageHeader }}
+                    sx={{ m: 1, p: 1 }}
+                  >
+                    {children}
+                  </PageContainer>
                 </DashboardLayout>
               </Provider>
             </NextAppProvider>

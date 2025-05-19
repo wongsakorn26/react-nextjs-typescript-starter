@@ -1,5 +1,4 @@
 "use client";
-import { dir } from "i18next";
 import { Provider } from "react-redux";
 import { store } from "../../redux/store";
 import { NextAppProvider } from "@toolpad/core/nextjs";
@@ -9,8 +8,7 @@ import { PageContainer } from "@toolpad/core/PageContainer";
 import { Stack, Typography, ThemeProvider, CssBaseline } from "@mui/material";
 import SelectLangButton from "@/components/select-lang-button";
 import CloudCircleIcon from "@mui/icons-material/CloudCircle";
-import { LangProvider, useLang } from "@/context/lang-context";
-import { useParams } from "next/navigation";
+import { LangProvider } from "@/context/lang-context";
 import { useTranslation } from "react-i18next";
 import customTheme from "../../theme/theme";
 import CustomPageHeader from "@/components/page-container/custom-page-header";
@@ -20,7 +18,7 @@ type Props = {
   params: { lng: string };
 };
 
-export default function localeLayout({ children, params }: Props) {
+export default function LocaleLayout({ children, params }: Props) {
   // const params = useParams();
   // const lang = params.lng;
   // const { t } = useTranslation(lang);

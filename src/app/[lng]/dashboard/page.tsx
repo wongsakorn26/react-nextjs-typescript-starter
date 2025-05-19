@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useTranslation } from "@/app/i18n/client";
-import { Grid, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
 import { useParams } from "next/navigation";
 
 export default function Dashboard() {

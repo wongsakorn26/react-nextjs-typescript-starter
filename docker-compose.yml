@@ -1,0 +1,15 @@
+version: "3.8"
+
+networks:
+  default:
+    name: default-starter
+
+services:
+  frontend:
+    build:
+      context: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    command: npm run dev

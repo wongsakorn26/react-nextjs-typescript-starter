@@ -1,7 +1,5 @@
 "use client";
 
-import Link from "next/link";
-import { useTranslation } from "@/app/i18n/client";
 import * as React from "react";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
@@ -9,9 +7,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 
-export default function Dashboard({ params }: { params: { lng: string } }) {
-  const { lng } = params;
-  const { t } = useTranslation(lng);
+export default function Dashboard() {
   const [age, setAge] = React.useState("");
 
   const handleChange = (event: SelectChangeEvent) => {

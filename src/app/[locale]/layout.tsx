@@ -12,6 +12,7 @@ import { LangProvider } from "@/context/lang-context";
 import customTheme from "../../theme/theme";
 import CustomPageHeader from "@/components/page-container/custom-page-header";
 import { useLocale, useTranslations } from "next-intl";
+
 type Props = {
   children: React.ReactNode;
 };
@@ -19,18 +20,19 @@ type Props = {
 export default function LocaleLayout({ children }: Props) {
   const t = useTranslations();
   const locale = useLocale();
+
   const NAVIGATION: Navigation = [
     {
       kind: "header",
       title: "Main items",
     },
     {
-      segment: `/dashboard`,
+      segment: "dashboard", // Remove leading slash
       title: t("dashboard"),
       // icon: <DashboardIcon />,
     },
     {
-      segment: `${locale}/member`,
+      segment: "member", // Remove leading slash
       title: t("member"),
       // icon: <ShoppingCartIcon />,
     },
@@ -79,27 +81,27 @@ export default function LocaleLayout({ children }: Props) {
   }
 
   return (
-    // <LangProvider>
-    <ThemeProvider theme={customTheme}>
-      <CssBaseline />
-      <NextAppProvider navigation={NAVIGATION}>
-        <Provider store={store}>
-          <DashboardLayout
-            slots={{
-              appTitle: CustomAppTitle,
-              sidebarFooter: CustomFooter,
-            }}
-          >
-            <PageContainer
-              slots={{ header: CustomPageHeader }}
-              sx={{ m: 1, p: 1 }}
+    <LangProvider>
+      <ThemeProvider theme={customTheme}>
+        <CssBaseline />
+        <NextAppProvider navigation={NAVIGATION}>
+          <Provider store={store}>
+            <DashboardLayout
+              slots={{
+                appTitle: CustomAppTitle,
+                sidebarFooter: CustomFooter,
+              }}
             >
-              {children}
-            </PageContainer>
-          </DashboardLayout>
-        </Provider>
-      </NextAppProvider>
-    </ThemeProvider>
-    // </LangProvider>
+              <PageContainer
+                slots={{ header: CustomPageHeader }}
+                sx={{ m: 1, p: 1 }}
+              >
+                {children}
+              </PageContainer>
+            </DashboardLayout>
+          </Provider>
+        </NextAppProvider>
+      </ThemeProvider>
+    </LangProvider>
   );
 }

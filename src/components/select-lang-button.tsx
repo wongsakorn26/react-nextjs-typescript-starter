@@ -1,36 +1,21 @@
 "use client";
-
-import { usePathname, useRouter } from "next/navigation";
-import { languages } from "@/app/i18n/settings";
-import { useLang } from "@/context/lang-context";
-import { Select, MenuItem, SelectChangeEvent } from "@mui/material";
+import { useLocale } from "next-intl";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function SelectLangButton() {
-  const pathname = usePathname();
   const router = useRouter();
+  const [locale, setLocale] = useState("");
+  const changeLanguage = (newLocale: string) => {
+    // Set cookie and refresh
 
-  const { lang, setLang } = useLang();
-
-  const handleChange = (event: SelectChangeEvent) => {
-    const newLang = (event.target.value as string).toLowerCase();
-    setLang(newLang);
-
-    const segments = pathname.split("/");
-
-    if (languages.includes(segments[1])) {
-      segments[1] = newLang;
-    } else {
-      segments.unshift("", newLang);
-    }
-
-    const newPath = segments.join("/");
-    router.push(newPath);
+    setLocale(newLocale);
   };
 
   return (
-    <Select value={lang.toUpperCase()} onChange={handleChange} size="small">
-      <MenuItem value="EN">{lang === "th" ? "อังกฤษ" : "EN"}</MenuItem>
-      <MenuItem value="TH">{lang === "th" ? "ไทย" : "TH"}</MenuItem>
-    </Select>
+    <div>
+      <button onClick={() => changeLanguage("en")}>English</button>
+      <button onClick={() => changeLanguage("th")}>ไทย</button>
+    </div>
   );
 }

@@ -1,15 +1,21 @@
 import { ReactNode } from "react";
+import { NextIntlClientProvider } from "next-intl";
 
 type Props = {
   children: ReactNode;
+  params: { locale: string };
 };
 
-// Since we have a `not-found.tsx` page on the root, a layout file
-// is required, even if it's just passing children through.
-export default function RootLayout({ children }: Props) {
+export default function RootLayout({ children, params }: Props) {
+  const { locale } = params;
+
   return (
-    <html lang="th">
-      <body>{children}</body>
+    <html lang={locale}>
+      <body>
+        <NextIntlClientProvider locale={locale}>
+          {children}
+        </NextIntlClientProvider>
+      </body>
     </html>
   );
 }

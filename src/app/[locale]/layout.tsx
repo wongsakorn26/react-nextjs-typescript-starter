@@ -9,34 +9,28 @@ import { Stack, Typography, ThemeProvider, CssBaseline } from "@mui/material";
 import SelectLangButton from "@/components/select-lang-button";
 import CloudCircleIcon from "@mui/icons-material/CloudCircle";
 import { LangProvider } from "@/context/lang-context";
-import { useTranslation } from "react-i18next";
 import customTheme from "../../theme/theme";
 import CustomPageHeader from "@/components/page-container/custom-page-header";
-
+import { useLocale, useTranslations } from "next-intl";
 type Props = {
   children: React.ReactNode;
-  params: { lng: string };
 };
 
-export default function LocaleLayout({ children, params }: Props) {
-  // const params = useParams();
-  // const lang = params.lng;
-  // const { t } = useTranslation(lang);
-  const lang = params.lng;
-  const { t } = useTranslation(lang);
-
+export default function LocaleLayout({ children }: Props) {
+  const t = useTranslations();
+  const locale = useLocale();
   const NAVIGATION: Navigation = [
     {
       kind: "header",
       title: "Main items",
     },
     {
-      segment: `${lang}/dashboard`,
+      segment: `/dashboard`,
       title: t("dashboard"),
       // icon: <DashboardIcon />,
     },
     {
-      segment: `${lang}/member`,
+      segment: `${locale}/member`,
       title: t("member"),
       // icon: <ShoppingCartIcon />,
     },
@@ -85,27 +79,27 @@ export default function LocaleLayout({ children, params }: Props) {
   }
 
   return (
-    <LangProvider>
-      <ThemeProvider theme={customTheme}>
-        <CssBaseline />
-        <NextAppProvider navigation={NAVIGATION}>
-          <Provider store={store}>
-            <DashboardLayout
-              slots={{
-                appTitle: CustomAppTitle,
-                sidebarFooter: CustomFooter,
-              }}
+    // <LangProvider>
+    <ThemeProvider theme={customTheme}>
+      <CssBaseline />
+      <NextAppProvider navigation={NAVIGATION}>
+        <Provider store={store}>
+          <DashboardLayout
+            slots={{
+              appTitle: CustomAppTitle,
+              sidebarFooter: CustomFooter,
+            }}
+          >
+            <PageContainer
+              slots={{ header: CustomPageHeader }}
+              sx={{ m: 1, p: 1 }}
             >
-              <PageContainer
-                slots={{ header: CustomPageHeader }}
-                sx={{ m: 1, p: 1 }}
-              >
-                {children}
-              </PageContainer>
-            </DashboardLayout>
-          </Provider>
-        </NextAppProvider>
-      </ThemeProvider>
-    </LangProvider>
+              {children}
+            </PageContainer>
+          </DashboardLayout>
+        </Provider>
+      </NextAppProvider>
+    </ThemeProvider>
+    // </LangProvider>
   );
 }

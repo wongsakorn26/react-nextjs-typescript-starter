@@ -8,8 +8,6 @@ import { PageContainer } from "@toolpad/core/PageContainer";
 import { Stack, Typography, ThemeProvider, CssBaseline } from "@mui/material";
 import SelectLangButton from "@/components/select-lang-button";
 import CloudCircleIcon from "@mui/icons-material/CloudCircle";
-// import { LangProvider } from "@/context/lang-context";
-import customTheme from "../../theme/theme";
 import CustomPageHeader from "@/components/page-container/custom-page-header";
 import { useLocale, useTranslations } from "next-intl";
 
@@ -81,27 +79,17 @@ export default function LocaleLayout({ children }: Props) {
   }
 
   return (
-    // <LangProvider>
-    <ThemeProvider theme={customTheme}>
-      <CssBaseline />
-      <NextAppProvider navigation={NAVIGATION}>
-        <Provider store={store}>
-          <DashboardLayout
-            slots={{
-              appTitle: CustomAppTitle,
-              sidebarFooter: CustomFooter,
-            }}
-          >
-            <PageContainer
-              slots={{ header: CustomPageHeader }}
-              sx={{ m: 1, p: 1 }}
-            >
-              {children}
-            </PageContainer>
-          </DashboardLayout>
-        </Provider>
-      </NextAppProvider>
-    </ThemeProvider>
-    //</LangProvider>
+    <NextAppProvider navigation={NAVIGATION}>
+      <DashboardLayout
+        slots={{
+          appTitle: CustomAppTitle,
+          sidebarFooter: CustomFooter,
+        }}
+      >
+        <PageContainer slots={{ header: CustomPageHeader }} sx={{ m: 1, p: 1 }}>
+          {children}
+        </PageContainer>
+      </DashboardLayout>
+    </NextAppProvider>
   );
 }

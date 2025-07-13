@@ -1,5 +1,5 @@
-"use client";
 import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
 import DashboardWrapper from "./dashboard-wrapper";
 
 type Props = {
@@ -7,13 +7,13 @@ type Props = {
   params: { locale: string };
 };
 
-export default function LocaleLayout({ children, params }: Props) {
-  const { locale } = params;
+export default async function Layout({ children, params: { locale } }: Props) {
+  const messages = await getMessages();
 
   return (
     <html lang={locale}>
       <body>
-        <NextIntlClientProvider locale={locale}>
+        <NextIntlClientProvider messages={messages}>
           <DashboardWrapper>{children}</DashboardWrapper>
         </NextIntlClientProvider>
       </body>

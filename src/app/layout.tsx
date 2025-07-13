@@ -6,16 +6,10 @@ type Props = {
   params: { locale: string };
 };
 
-export default function RootLayout({ children, params }: Props) {
-  const { locale } = params;
-
+export default function RootLayout({ children }: Props) {
   return (
-    <html lang={locale}>
-      <body>
-        <NextIntlClientProvider locale={locale}>
-          {children}
-        </NextIntlClientProvider>
-      </body>
+    <html>
+      <body>{children}</body>
     </html>
   );
 }

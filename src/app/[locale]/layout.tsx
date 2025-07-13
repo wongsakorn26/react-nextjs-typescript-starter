@@ -8,7 +8,7 @@ import { PageContainer } from "@toolpad/core/PageContainer";
 import { Stack, Typography, ThemeProvider, CssBaseline } from "@mui/material";
 import SelectLangButton from "@/components/select-lang-button";
 import CloudCircleIcon from "@mui/icons-material/CloudCircle";
-import { LangProvider } from "@/context/lang-context";
+// import { LangProvider } from "@/context/lang-context";
 import customTheme from "../../theme/theme";
 import CustomPageHeader from "@/components/page-container/custom-page-header";
 import { useLocale, useTranslations } from "next-intl";
@@ -27,12 +27,12 @@ export default function LocaleLayout({ children }: Props) {
       title: "Main items",
     },
     {
-      segment: "dashboard", // Remove leading slash
+      segment: "dashboard",
       title: t("dashboard"),
       // icon: <DashboardIcon />,
     },
     {
-      segment: "member", // Remove leading slash
+      segment: "member",
       title: t("member"),
       // icon: <ShoppingCartIcon />,
     },
@@ -81,27 +81,27 @@ export default function LocaleLayout({ children }: Props) {
   }
 
   return (
-    <LangProvider>
-      <ThemeProvider theme={customTheme}>
-        <CssBaseline />
-        <NextAppProvider navigation={NAVIGATION}>
-          <Provider store={store}>
-            <DashboardLayout
-              slots={{
-                appTitle: CustomAppTitle,
-                sidebarFooter: CustomFooter,
-              }}
+    // <LangProvider>
+    <ThemeProvider theme={customTheme}>
+      <CssBaseline />
+      <NextAppProvider navigation={NAVIGATION}>
+        <Provider store={store}>
+          <DashboardLayout
+            slots={{
+              appTitle: CustomAppTitle,
+              sidebarFooter: CustomFooter,
+            }}
+          >
+            <PageContainer
+              slots={{ header: CustomPageHeader }}
+              sx={{ m: 1, p: 1 }}
             >
-              <PageContainer
-                slots={{ header: CustomPageHeader }}
-                sx={{ m: 1, p: 1 }}
-              >
-                {children}
-              </PageContainer>
-            </DashboardLayout>
-          </Provider>
-        </NextAppProvider>
-      </ThemeProvider>
-    </LangProvider>
+              {children}
+            </PageContainer>
+          </DashboardLayout>
+        </Provider>
+      </NextAppProvider>
+    </ThemeProvider>
+    //</LangProvider>
   );
 }

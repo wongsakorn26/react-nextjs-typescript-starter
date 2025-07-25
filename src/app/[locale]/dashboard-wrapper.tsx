@@ -31,6 +31,10 @@ export default function DashboardWrapper({
       title: t("member"),
     },
     {
+      segment: "skin",
+      title: t("Skin"),
+    },
+    {
       kind: "divider",
     },
     {

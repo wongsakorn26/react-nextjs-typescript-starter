@@ -1,14 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { Grid } from "@mui/material";
-import { useParams } from "next/navigation";
-
 import { useTranslations } from "next-intl";
+import { Grid } from "@mui/material";
 
 export default function Dashboard() {
   const t = useTranslations();
-
   return (
     <Grid container spacing={2}>
       <Grid size={{ xs: 4 }}>

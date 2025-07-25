@@ -58,7 +58,6 @@ import { NextRequest, NextResponse } from 'next/server';
 export default createMiddleware(routing);
 
 export const config = {
-    // matcher: ["/", "/(th|en)/:path*"],'
-    matcher: ["/((?!api|_next/static|_next/image|assets|favicon.ico|sw.js).*)"],
-
+    // matcher: ["/", "/(th|en)/:path*"],
+    matcher: ["/((?!api|_next/static|_next/image|assets|favicon.ico|sw.js|th|en).*)"],
 };

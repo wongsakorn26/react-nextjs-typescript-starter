@@ -53,11 +53,9 @@
 
 import createMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
-import { NextRequest, NextResponse } from 'next/server';
 
 export default createMiddleware(routing);
 
 export const config = {
-    // matcher: ["/", "/(th|en)/:path*"],
-    matcher: ["/((?!api|_next/static|_next/image|assets|favicon.ico|sw.js|th|en).*)"],
-};
+    matcher: ['/((?!_next|api|.*\\.).*)']
+}

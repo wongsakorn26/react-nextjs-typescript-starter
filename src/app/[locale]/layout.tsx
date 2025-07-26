@@ -1,6 +1,6 @@
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
-import DashboardWrapper from "./dashboard-wrapper";
+import DashboardWrapper from "./dashboardWrapper";
 
 type Props = {
   children: React.ReactNode;

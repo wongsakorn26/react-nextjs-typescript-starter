@@ -30,7 +30,6 @@ const columns: GridColDef[] = [
 ];
 
 export default function DataGridComponent({ items, isLoading }: Props) {
-  console.log(items);
   return (
     <Box sx={{ height: 500, width: "100%" }}>
       <DataGrid

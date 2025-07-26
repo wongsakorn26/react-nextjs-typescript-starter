@@ -49,5 +49,6 @@
   "saveSuccess": "บันทึกข้อมูลสําเร็จ",
   "deleteSuccess": "ลบข้อมูลสําเร็จ",
 
-  "dashboard": "แดชบอร์ด"
+  "dashboard": "แดชบอร์ด",
+  "skin": "Skin"
 }

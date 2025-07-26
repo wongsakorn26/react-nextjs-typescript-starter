@@ -5,9 +5,10 @@ import { DashboardLayout } from "@toolpad/core/DashboardLayout";
 import { PageContainer } from "@toolpad/core/PageContainer";
 import { Stack, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
-import SelectLangButton from "@/components/select-lang-button";
+import SelectLangButton from "@/components/selectLangButton";
 import CloudCircleIcon from "@mui/icons-material/CloudCircle";
-import CustomPageHeader from "@/components/page-container/custom-page-header";
+import CustomPageHeader from "@/components/pageContainer/customPageHeader";
+import { usePathname } from "next/navigation";
 
 export default function DashboardWrapper({
   children,
@@ -15,7 +16,11 @@ export default function DashboardWrapper({
   children: React.ReactNode;
 }) {
   const t = useTranslations();
+  const pathname = usePathname();
 
+  if (pathname == "/en/login" || pathname == "/th/login") {
+    return <>{children}</>;
+  }
   const NAVIGATION: Navigation = [
     {
       kind: "header",
@@ -32,7 +37,7 @@ export default function DashboardWrapper({
     },
     {
       segment: "skin",
-      title: t("Skin"),
+      title: t("skin"),
     },
     {
       kind: "divider",

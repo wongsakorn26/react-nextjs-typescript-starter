@@ -2,6 +2,10 @@ import LoginForm from "@/components/loginForm/loginForm";
 import { Grid } from "@mui/material";
 import React from "react";
 
+export const metadata = {
+  title: "Signin",
+};
+
 export default function LoginPage() {
   return (
     <Grid

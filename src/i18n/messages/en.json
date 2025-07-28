@@ -1,4 +1,8 @@
 {
+  "login": "Login",
+  "username": "Username",
+  "password": "Password",
+  "required": "Please fill {name}",
   "member": "Member",
   "layoutStyle": "Layout & Style",
   "home": "Home",
@@ -50,5 +54,5 @@
   "deleteSuccess": "Delete Success",
 
   "dashboard": "Dashboard",
-  "skin":"Skin"
+  "skin": "Skin"
 }

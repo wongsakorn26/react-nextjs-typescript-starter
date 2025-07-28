@@ -18,7 +18,7 @@ export default function DashboardWrapper({
   const t = useTranslations();
   const pathname = usePathname();
 
-  if (pathname == "/en/login" || pathname == "/th/login") {
+  if (pathname == "/en/signin" || pathname == "/th/signin") {
     return <>{children}</>;
   }
   const NAVIGATION: Navigation = [

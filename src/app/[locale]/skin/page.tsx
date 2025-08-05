@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { Grid } from "@mui/material";
-import { useSkin } from "@/apis/hooks/useSkin";
+import { useSkin } from "@/api/hooks/useSkin";
 import DataGridComponent from "@/components/tableComponents/dataGrid";
 import { MinimalSkin } from "@/types/skin";
 

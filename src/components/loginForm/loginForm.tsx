@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Card, CardContent, Grid, TextField, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import SignInSchema from "@/schema/signInSchema";
@@ -12,6 +12,7 @@ import Cookies from "js-cookie";
 
 export default function LoginForm() {
   const t = useTranslations();
+  const locale = useLocale();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [rememberMe] = useState(false);
   const {
@@ -27,8 +28,9 @@ export default function LoginForm() {
       redirect: false,
       username: values.username,
       password: values.password,
-      locale: Cookies.get("NEXT_LOCALE"),
-      remember_me: rememberMe.toString(),
+      // locale: Cookies.get("NEXT_LOCALE"),
+      // remember_me: rememberMe.toString(),
+      callbackUrl: "/dashboard",
     }).then((res) => {
       if (res?.status !== 200) {
         setIsSubmitting(false);
@@ -36,6 +38,26 @@ export default function LoginForm() {
       }
     });
   };
+  // const onSubmit = async (values: { username: string; password: string }) => {
+  //   setIsSubmitting(true);
+  //   console.log("Submitting form with values:", values);
+
+  //   const res = await signIn("credentials", {
+  //     redirect: false, // ← means YOU must redirect manually
+  //     username: values.username,
+  //     password: values.password,
+  //     callbackUrl: `${locale}/dashboard`, // ← this is where you want to go after login
+  //   });
+  //   console.log(res)
+
+  //   if (res?.ok && res.url) {
+  //     window.location.href = res.url; // ✅ manual redirect
+  //   } else {
+  //     setIsSubmitting(false);
+  //     // enqueueSnackbar(res?.error ?? "Login failed", { variant: "error" });
+  //   }
+  // };
+  
 
   return (
     <Card sx={{ maxWidth: 345 }}>

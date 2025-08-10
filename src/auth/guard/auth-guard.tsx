@@ -13,7 +13,7 @@ export default function AuthGuard({ children }: AuthGuardProps) {
   const params = new URLSearchParams(searchParams.toString());
 
   const { status, data: session } = useSession();
-  console.log("session useSession:  ",session);
+  console.log("session useSession:  ", session);
   console.log("status useSession:  ", status);
 
   const [checked, setChecked] = useState(false);
@@ -22,9 +22,8 @@ export default function AuthGuard({ children }: AuthGuardProps) {
     if (status === "unauthenticated") {
       const newParams = new URLSearchParams();
       router.replace("signin?" + newParams.toString());
-    // } else if (status === "authenticated") {
-    //   router.replace("dashboard")
-      // setChecked(true)
+    } else if (status === "authenticated") {
+      setChecked(true);
     } else if (status === "loading") {
       return;
     }
@@ -34,13 +33,17 @@ export default function AuthGuard({ children }: AuthGuardProps) {
     check();
   }, [status, check]);
 
-  if (!checked) return null;
+  if (status === "loading") {
+    return <div>Loading...</div>
+  }
+
+  if (!checked && status !== "authenticated") {
+    return null;
+  }
 
   return (
     <>
-      {/* <AlertNotification> */}
       {children}
-      {/* </AlertNotification> */}
     </>
   );
 }

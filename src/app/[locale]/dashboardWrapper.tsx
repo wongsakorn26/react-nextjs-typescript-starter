@@ -9,7 +9,7 @@ import SelectLangButton from "@/components/selectLangButton";
 import CloudCircleIcon from "@mui/icons-material/CloudCircle";
 import CustomPageHeader from "@/components/pageContainer/customPageHeader";
 import { usePathname } from "next/navigation";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import LogoutIcon from "@mui/icons-material/Logout";
 
 export default function DashboardWrapper({
@@ -19,6 +19,7 @@ export default function DashboardWrapper({
 }) {
   const t = useTranslations();
   const pathname = usePathname();
+  const { status } = useSession();
 
   const handleLogout = () => {
     signOut();
@@ -27,6 +28,31 @@ export default function DashboardWrapper({
   if (pathname == "/en/signin" || pathname == "/th/signin") {
     return <>{children}</>;
   }
+
+  if (status === "loading") {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+          flexDirection: "column",
+          fontSize: "18px",
+        }}
+      >
+        <Typography variant="h6">Loading...</Typography>
+        <Typography variant="body2" sx={{ mt: 1 }}>
+          Checking authentication...
+        </Typography>
+      </div>
+    );
+  }
+
+  if (status === "unauthenticated") {
+    return <>{children}</>;
+  }
+
   const NAVIGATION: Navigation = [
     {
       kind: "header",

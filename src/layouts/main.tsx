@@ -77,29 +77,27 @@ export default function DashboardWrapper({
       <Stack direction="row" alignItems="center" spacing={2}>
         <CloudCircleIcon fontSize="large" color="primary" />
         <Typography variant="h6">My App</Typography>
-        
       </Stack>
     );
   }
 
   function CustomFooter() {
     return (
-    <Stack >
-      <IconButton>
+      <Stack>
+        <IconButton>
           <LogoutIcon
             style={{ color: "secondary.light" }}
             onClick={handleLogout}
             fontSize="medium"
           />
         </IconButton>
-      <SelectLangButton />
-    </Stack>
-    )
-    
+        <SelectLangButton />
+      </Stack>
+    );
   }
 
   return (
-    <NextAppProvider navigation={NAVIGATION}>
+    // <NextAppProvider navigation={NAVIGATION}>
       <DashboardLayout
         slots={{
           appTitle: CustomAppTitle,
@@ -110,6 +108,6 @@ export default function DashboardWrapper({
           {children}
         </PageContainer>
       </DashboardLayout>
-    </NextAppProvider>
+    // </NextAppProvider>
   );
 }

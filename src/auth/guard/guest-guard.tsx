@@ -21,7 +21,7 @@ export default function GuestGuard({ children }: GuestGuardProps) {
       // if (redirect_to) {
         // router.replace(redirect_to)
       // } else 
-      router.replace("member")
+      router.replace("dashboard")
     }
   }, [status, router, pathname, session])
 

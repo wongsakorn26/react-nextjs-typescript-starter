@@ -2,12 +2,13 @@ import createMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
 import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
+import { useSession } from "next-auth/react";
 
-const intlMiddleware = createMiddleware(routing);
+export default createMiddleware(routing);
 
 export async function middleware(req: NextRequest) {
     // Run the next-intl middleware
-    const response = intlMiddleware(req)
+    // const response = intlMiddleware(req)
 
     // Fetch the token from the request
     const token = await getToken({ req })
@@ -23,5 +24,8 @@ export async function middleware(req: NextRequest) {
     // return response
   }
 export const config = {
-    matcher: ['/((?!_next|api|.*\\.).*)']
+    // matcher: ['/((?!_next|api|.*\\.).*)']
+    
+    matcher: ["/((?!api|_next/static|_next/image|assets|favicon.ico|sw.js|th|en).*)"],
+
 }

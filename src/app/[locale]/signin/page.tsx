@@ -1,22 +1,9 @@
-import LoginForm from "@/components/loginForm/loginForm";
-import { Grid } from "@mui/material";
-import React from "react";
+import { Signin } from "@/sections/signin";
 
 export const metadata = {
-  title: "Signin",
+  title: "MemberList",
 };
 
-export default function LoginPage() {
-  return (
-    <Grid
-      container
-      spacing={0}
-      direction="column"
-      alignItems="center"
-      justifyContent="center"
-      sx={{ minHeight: "100vh" }}
-    >
-      <LoginForm />
-    </Grid>
-  );
+export default function SigninApp() {
+  return <Signin />;
 }

@@ -1,18 +1,9 @@
-"use client";
+import { OverallDashboard } from "@/sections/dashboard";
 
-import Link from "next/link";
-import { useTranslations } from "next-intl";
-import { Grid } from "@mui/material";
+export const metadata = {
+  title: "OverallDashboard",
+};
 
-export default function Dashboard() {
-  const t = useTranslations();
-  return (
-    <Grid container spacing={2}>
-      <Grid size={{ xs: 4 }}>
-        <Link href={`/member`}>{t("phonePrefix")}</Link>
-      </Grid>
-      <Grid size={{ xs: 4 }}>2</Grid>
-      <Grid size={{ xs: 6 }}>3</Grid>
-    </Grid>
-  );
+export default function DashboardApp() {
+  return <OverallDashboard />;
 }

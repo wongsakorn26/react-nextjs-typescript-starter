@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { Grid } from "@mui/material";
 
-export default function OverallDashboard() {
+export default function OverallDashboardSection() {
   const t = useTranslations();
   return (
     <Grid container spacing={2}>

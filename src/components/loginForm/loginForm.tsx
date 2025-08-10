@@ -23,7 +23,6 @@ export default function LoginForm() {
 
   const onSubmit = (values: { username: string; password: string }) => {
     setIsSubmitting(true);
-    console.log("Submitting form with values:", values);
     signIn("signin", {
       redirect: false,
       username: values.username,
@@ -38,26 +37,6 @@ export default function LoginForm() {
       }
     });
   };
-  // const onSubmit = async (values: { username: string; password: string }) => {
-  //   setIsSubmitting(true);
-  //   console.log("Submitting form with values:", values);
-
-  //   const res = await signIn("credentials", {
-  //     redirect: false, // ← means YOU must redirect manually
-  //     username: values.username,
-  //     password: values.password,
-  //     callbackUrl: `${locale}/dashboard`, // ← this is where you want to go after login
-  //   });
-  //   console.log(res)
-
-  //   if (res?.ok && res.url) {
-  //     window.location.href = res.url; // ✅ manual redirect
-  //   } else {
-  //     setIsSubmitting(false);
-  //     // enqueueSnackbar(res?.error ?? "Login failed", { variant: "error" });
-  //   }
-  // };
-  
 
   return (
     <Card sx={{ maxWidth: 345 }}>

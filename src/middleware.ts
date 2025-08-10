@@ -6,26 +6,26 @@ import { useSession } from "next-auth/react";
 
 export default createMiddleware(routing);
 
-export async function middleware(req: NextRequest) {
-    // Run the next-intl middleware
-    // const response = intlMiddleware(req)
+// export async function middleware(req: NextRequest) {
+//     // Run the next-intl middleware
+//     // const response = intlMiddleware(req)
 
-    // Fetch the token from the request
-    const token = await getToken({ req })
+//     // Fetch the token from the request
+//     const token = await getToken({ req })
 
-    console.log("token : ",token);
-    // return NextResponse.redirect(
-    //     new URL("/th/member", req.url)
-    //   )
-        // NextResponse.redirect(new URL("/member", req.url))
+//     console.log("token : ",token);
+//     // return NextResponse.redirect(
+//     //     new URL("/th/member", req.url)
+//     //   )
+//         // NextResponse.redirect(new URL("/member", req.url))
   
 
-    // Return the response from the next-intl middleware
-    // return response
-  }
+//     // Return the response from the next-intl middleware
+//     // return response
+//   }
 export const config = {
-    // matcher: ['/((?!_next|api|.*\\.).*)']
+    matcher: ['/((?!_next|api|.*\\.).*)']
     
-    matcher: ["/((?!api|_next/static|_next/image|assets|favicon.ico|sw.js|th|en).*)"],
+    // matcher: ["/((?!api|_next/static|_next/image|assets|favicon.ico|sw.js|th|en).*)"],
 
 }

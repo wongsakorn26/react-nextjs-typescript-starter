@@ -22,9 +22,9 @@ export default function AuthGuard({ children }: AuthGuardProps) {
     if (status === "unauthenticated") {
       const newParams = new URLSearchParams();
       router.replace("signin?" + newParams.toString());
-    } else if (status === "authenticated") {
-      router.replace("dashboard")
-      setChecked(true)
+    // } else if (status === "authenticated") {
+    //   router.replace("dashboard")
+      // setChecked(true)
     } else if (status === "loading") {
       return;
     }

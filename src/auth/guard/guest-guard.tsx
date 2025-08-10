@@ -15,7 +15,6 @@ export default function GuestGuard({ children }: GuestGuardProps) {
   const params = new URLSearchParams(searchParams.toString())
 
   const check = useCallback(() => {
-    console.log(status)
     if (status === "authenticated") {
       // const redirect_to = params.get("redirect_to")
       // if (redirect_to) {

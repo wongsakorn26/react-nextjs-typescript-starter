@@ -13,9 +13,6 @@ export default function AuthGuard({ children }: AuthGuardProps) {
   const params = new URLSearchParams(searchParams.toString());
 
   const { status, data: session } = useSession();
-  console.log("session useSession:  ", session);
-  console.log("status useSession:  ", status);
-
   const [checked, setChecked] = useState(false);
 
   const check = useCallback(() => {

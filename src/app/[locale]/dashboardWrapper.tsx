@@ -1,9 +1,16 @@
 "use client";
 import { NextAppProvider } from "@toolpad/core/nextjs";
 import { Navigation } from "@toolpad/core/AppProvider";
-import { DashboardLayout } from "@toolpad/core/DashboardLayout";
+import { DashboardLayout, ThemeSwitcher } from "@toolpad/core/DashboardLayout";
 import { PageContainer } from "@toolpad/core/PageContainer";
-import { IconButton, Stack, Typography } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  IconButton,
+  Stack,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import { useTranslations } from "next-intl";
 import SelectLangButton from "@/components/selectLangButton";
 import CloudCircleIcon from "@mui/icons-material/CloudCircle";
@@ -19,34 +26,14 @@ export default function DashboardWrapper({
 }) {
   const t = useTranslations();
   const pathname = usePathname();
-  const { status } = useSession();
-
+  const { status, data: session } = useSession();
+  
   const handleLogout = () => {
     signOut();
   };
 
   if (pathname == "/en/signin" || pathname == "/th/signin") {
     return <>{children}</>;
-  }
-
-  if (status === "loading") {
-    return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-          flexDirection: "column",
-          fontSize: "18px",
-        }}
-      >
-        <Typography variant="h6">Loading...</Typography>
-        <Typography variant="body2" sx={{ mt: 1 }}>
-          Checking authentication...
-        </Typography>
-      </div>
-    );
   }
 
   if (status === "unauthenticated") {
@@ -110,6 +97,14 @@ export default function DashboardWrapper({
   function CustomFooter() {
     return (
       <Stack>
+        <SelectLangButton />
+      </Stack>
+    );
+  }
+
+  function ToolbarActionsSearch() {
+    return (
+      <Stack direction="row" alignItems="center" spacing={1}>
         <IconButton>
           <LogoutIcon
             style={{ color: "secondary.light" }}
@@ -117,7 +112,20 @@ export default function DashboardWrapper({
             fontSize="medium"
           />
         </IconButton>
-        <SelectLangButton />
+        <Tooltip title={session?.user.username} enterDelay={1000}>
+          <IconButton
+            onClick={() => {
+              console.log("test click avatar");
+            }}
+            size="medium"
+          >
+            <Avatar alt={session?.user.username} sx={{ width: 24, height: 24 }}>
+              {session?.user.username?.split("")[0].toUpperCase()}
+            </Avatar>
+          </IconButton>
+        </Tooltip>
+
+        <ThemeSwitcher />
       </Stack>
     );
   }
@@ -128,10 +136,23 @@ export default function DashboardWrapper({
         slots={{
           appTitle: CustomAppTitle,
           sidebarFooter: CustomFooter,
+          toolbarActions: ToolbarActionsSearch,
         }}
       >
-        <PageContainer slots={{ header: CustomPageHeader }} sx={{ m: 1, p: 1 }}>
-          {children}
+        <PageContainer
+          slots={{ header: CustomPageHeader }}
+          fixed
+          disableGutters
+          sx={{ minWidth: "100%" }}
+        >
+          <Box
+            sx={{
+              height: "100%",
+              m: 1,
+            }}
+          >
+            {children}
+          </Box>
         </PageContainer>
       </DashboardLayout>
     </NextAppProvider>

@@ -3,8 +3,8 @@ import React from "react";
 
 export default function CustomPageHeader() {
   return (
-    <Grid container sx={{ m: 0, p: 0 }}>
-      CSGO DATA
+    <Grid container sx={{ m: 1, p: 1 }}>
+      Dashboard DEMO
     </Grid>
   );
 }

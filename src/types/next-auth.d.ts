@@ -13,6 +13,7 @@ declare module "next-auth" {
       role?: string
       is_active?: boolean
       phone_number?: string
+      username?: string
     }
   }
 }

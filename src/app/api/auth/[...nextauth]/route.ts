@@ -15,20 +15,15 @@ const authOptions: AuthOptions = {
                 password: { label: "Password", type: "password" },
             },
             async authorize(credentials) {
-                console.log(credentials)
                 try {
-                    const res = await axios.post("http://host.docker.internal:5001/api/v1/authentication/signin", {
+                    const res = await axios.post(`${process.env.API_ENDPOINT}/api/v1/authentication/signin`, {
                         username: credentials?.username,
                         password: credentials?.password,
                     });
                       
-                    console.log(res.data)
                     if (res) return res.data
-                
                 } catch (error) {
                     const err = error as ServerResErrorProps
-                    console.log("................................................................")
-                    console.log(err)
                     throw new Error(err?.response.data.message)
                 }
               },
@@ -36,16 +31,16 @@ const authOptions: AuthOptions = {
         }),
     ],
     callbacks: {
-        async jwt({ token, user }) {
-            return typeof user !== "undefined" ? (user as unknown as JWT) : token
-
-        },
         async session({ session, token }) {
             return {
                 ...session,
-                accessToken: token.accessToken,
+                accessToken: token.tokens,
+                user: token["user"] as {},
             }
         },
+        async jwt({ token, user }) {
+            return typeof user !== "undefined" ? (user as unknown as JWT) : token
+        }
     },
     pages: {
         signIn: "/signin",

@@ -19,20 +19,31 @@ export default function MemberList() {
   //   image: s.image,
   // }));
 
-  const [posts, setPosts] = useState();
+  const [posts, setPosts] = useState<any>(null);
   const axiosAuth = useAxiosAuth();
   const fetchPosts = async () => {
     const res = await axiosAuth.get("/api/v1/helloworld");
     setPosts(res.data);
-    console.log(res.data);
-  };
+    console.log(res.data); //{content: "test", message: "Hello"}
+  };  
   return (
     <Grid container spacing={2}>
       <Grid size={{ xs: 24 }}>
         <Button onClick={fetchPosts}>Get Data</Button>
-        {/* {posts ?? JSON.stringify(posts)} */}
-        {}
-        {/* {posts ?? posts?.content} */}
+        <Button
+          onClick={() => {
+            setPosts("");
+          }}
+        >
+          Clear Data
+        </Button>
+        {posts && <pre>{JSON.stringify(posts, null, 2)}</pre>}
+        {posts && (
+          <Grid container spacing={2}>
+            <Grid size={{ xs: 2 }}>{posts.content}</Grid>
+            <Grid size={{ xs: 2 }}>{posts.message}</Grid>
+          </Grid>
+        )}
         {/* <DataGridComponent items={items ?? []} isLoading={skinLoading} /> */}
       </Grid>
     </Grid>

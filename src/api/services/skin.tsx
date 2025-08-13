@@ -1,9 +1,9 @@
-import api from "../axios";
+import { axiosAuth } from "../axios";
 
 export class SkinService {
   static async getSkin() {
     try {
-      const response = await api.get("/skins.json");
+      const response = await axiosAuth.get("/skins.json");
       return response.data;
     } catch (error) {
       throw new Error(`Fail to fetch skin ${error}`);

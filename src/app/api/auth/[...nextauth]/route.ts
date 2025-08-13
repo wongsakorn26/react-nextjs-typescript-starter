@@ -20,26 +20,28 @@ const authOptions: AuthOptions = {
                         username: credentials?.username,
                         password: credentials?.password,
                     });
-                      
+
                     if (res) return res.data
                 } catch (error) {
                     const err = error as ServerResErrorProps
                     throw new Error(err?.response.data.message)
                 }
-              },
-           
+            },
+
         }),
     ],
     callbacks: {
         async session({ session, token }) {
             return {
                 ...session,
-                accessToken: token.tokens,
+                tokens: token.tokens,
+                refresh: token.refresh,
                 user: token["user"] as {},
             }
         },
         async jwt({ token, user }) {
-            return typeof user !== "undefined" ? (user as unknown as JWT) : token
+            // return typeof user !== "undefined" ? (user as unknown as JWT) : token
+            return { ...token, ...user }
         }
     },
     pages: {
